@@ -1,0 +1,17 @@
+{
+  "name": "chao_yi_shu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "koa": "^2.13.4",
+    "koa-router": "^12.0.0",
+    "request": "^2.88.2"
+  }
+}
