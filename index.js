@@ -3,7 +3,7 @@ const app = new Koa();
 const axios = require('axios')
 const open = require('open')
 const FormData = require("form-data")
-const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxMzY0MTgzNjY5MCIsInNvdXJjZSI6InBjIiwidHlwZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY3NTI4NjY3LCJzaWduSWQiOiJiZmQ3ZjE0ZTc3MGY0YmFiYTY3M2M2YzVkYmE5NTU5NyIsImlhdCI6MTY2NjkyMzg2N30.WuXhR-h0Mmh5kdDhc4FAWYky1_SVE_3MvkFk8mRJbNA'
+const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIxMzY0MTgzNjY5MCIsInNvdXJjZSI6InBjIiwidHlwZSI6ImN1c3RvbWVyIiwiZXhwIjoxNjY3Nzg2NTIwLCJzaWduSWQiOiJlZWJkYjU4ZDhhMWQ0NjNlYTRiOTU1ZTA2MjcwY2JlZiIsImlhdCI6MTY2NzE4MTcyMH0.fNt7qxREeOY3D9uvEOOuMyQbTuueehlkcU2Hwcu_mfI'
 const instance = axios.create({
   baseURL: 'https://api.gandart.com/market/api/v2/',
   timeout: 2000,
@@ -15,6 +15,7 @@ const instance = axios.create({
     'token': token
   }
 });
+
 const instance2 = axios.create({
   baseURL: 'https://api.gandart.com/base/v2/',
   timeout: 2000,
@@ -26,21 +27,28 @@ const instance2 = axios.create({
     'token': token
   }
 });
-let price = 470
+let price = 1999
 let key = {
   111: '拾荒者',
-  84: '探索者I-Shift'
+  84: '探索者I-Shift',
+  96: '涅槃之地',
+  112: '龙蛋',
+  95: '提灯'
 }
 let getList = () => {
+
   let params = new FormData()
-  params.append('castingId', 84)
+  params.append('castingId', 96)
   params.append('page', 1)
   params.append('pageSize', 15)
   params.append('sort', 2)
   params.append('transactionStatus', 2)
   instance.post("resaleManage/resale/onSale", params).then((res) => {
     let f = []
-    res.data.obj.list.forEach(item => {
+    res.data.obj.list.forEach((item, index) => {
+      if (index == 0) {
+        console.log('最低价：' + item.resalePrice)
+      }
       if (parseFloat(item.resalePrice) <= price && item.transactionStatus == 2) {
         f.push(item)
       }
@@ -99,7 +107,7 @@ let buy = (transactionRecordId, item) => {
 
     if (res.data.success) {
       console.log(res.data)
-      open('www.baidu.com?a=asdasdasdasdasdasddddddddddddd', 'chrome')
+      open('https://www.baidu.com?a=asdasdasdasdasdasddddddddddddd', 'chrome')
     }
     else {
       setTimeout(() => {
