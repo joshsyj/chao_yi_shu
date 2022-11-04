@@ -27,18 +27,20 @@ const instance2 = axios.create({
     'token': token
   }
 });
-let price = 1999
+let price = 2000
 let key = {
   111: '拾荒者',
   84: '探索者I-Shift',
   96: '涅槃之地',
   112: '龙蛋',
-  95: '提灯'
+  95: '提灯',
+  101: '凤羽泪',
+  29: '云木'
 }
 let getList = () => {
 
   let params = new FormData()
-  params.append('castingId', 96)
+  params.append('castingId', 29)
   params.append('page', 1)
   params.append('pageSize', 15)
   params.append('sort', 2)
